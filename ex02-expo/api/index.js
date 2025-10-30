@@ -6,7 +6,7 @@ const headerJson = {
 
 const instance = axios.create({
   baseURL: "https://parseapi.back4app.com",
-  timeout: 1000,
+  timeout: 2000,
   headers: {
     "X-Parse-Application-Id": "b44WHXPs2YqHDajovVVALA8b6labKQP4nDbR2WsG",
     "X-Parse-JavaScript-Key": "SJvyjqtUsQlMIdYeckPIv5FNT7sILBDmBnmQVSCN",
@@ -15,7 +15,7 @@ const instance = axios.create({
 
 export async function getTasks() {
   const response = await instance.get("/classes/Task");
-  return response.data;
+  return response.data.results;
 }
 
 export async function addTask(task) {
