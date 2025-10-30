@@ -55,6 +55,9 @@
         "projectId": "cff5745e-c2c4-40ea-a70e-3a909eaf7a4d"
       }
     },
-    "owner": "davidcands"
+    "owner": "davidcands",
+    "updates": {
+      "url": "https://u.expo.dev/cff5745e-c2c4-40ea-a70e-3a909eaf7a4d"
+    }
   }
 }
