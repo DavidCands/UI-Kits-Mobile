@@ -12,12 +12,12 @@ export default function Index() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text variant="headlineMedium" style={{ marginBottom: 20 }}>
-        Olá Turma!
+        Hello, my friend!
       </Text>
 
       <Image
         style={styles.avatar}
-        source={require("@/assets/images/avatar.jpg")}
+        source={require("@/assets/images/avatarCurry.webp")}
       />
 
       <Card
@@ -69,14 +69,16 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    backgroundColor: "beige",
+    backgroundColor: "black",
     padding: 20,
   },
+  
   avatar: {
     width: 150,
     height: 150,
     borderRadius: 75,
   },
+
   buttonsContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
