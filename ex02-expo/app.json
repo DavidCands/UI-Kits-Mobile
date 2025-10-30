@@ -46,17 +46,15 @@
       "typedRoutes": true,
       "reactCompiler": true
     },
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "32fea3ba-b828-4335-b45d-8b3afa00f484"
-      }
-    },
     "runtimeVersion": {
       "policy": "appVersion"
     },
-    "updates": {
-      "url": "https://u.expo.dev/32fea3ba-b828-4335-b45d-8b3afa00f484"
-    }
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "cff5745e-c2c4-40ea-a70e-3a909eaf7a4d"
+      }
+    },
+    "owner": "davidcands"
   }
 }
