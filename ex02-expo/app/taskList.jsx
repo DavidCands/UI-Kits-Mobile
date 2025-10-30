@@ -3,7 +3,7 @@ import { CardTask } from "@/components/CardTask";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { FlatList, View } from "react-native";
-import { Text, TextInput, Button, Divider } from "react-native-paper";
+import { Button, TextInput, Text, Divider } from "react-native-paper";
 
 export default function TaskList() {
   const [description, setDescription] = useState("");
@@ -37,21 +37,20 @@ export default function TaskList() {
 
   if (isFetching) return <Text>Carregando...</Text>;
   if (error) return <Text>Erro: {error.message}</Text>;
-  if (!data) return <Text>Nenhuma tarefa encontrada.</Text>;
+  if (!data) return <Text>Nenhuma tarefa encontrada</Text>;
 
   return (
     <View style={{ padding: 20 }}>
-      <Text variant="headlineMedium" style={{ marginBottom: 10 }}>
+      <Text variant="headlineSmall" style={{ marginBottom: 10 }}>
         Lista de Tarefas
       </Text>
 
-      <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
         <TextInput
-          mode="outlined"
           placeholder="Adicionar tarefa"
           value={description}
           onChangeText={setDescription}
-          style={{ flex: 1 }}
+          style={{ flex: 1, marginRight: 10 }}
         />
         <Button
           mode="contained"
@@ -61,7 +60,7 @@ export default function TaskList() {
         </Button>
       </View>
 
-      <Divider style={{ marginVertical: 15 }} />
+      <Divider style={{ marginVertical: 10 }} />
 
       <FlatList
         data={data.results}
@@ -76,7 +75,7 @@ export default function TaskList() {
         )}
       />
 
-      {isPending && <Text>Aguarde...</Text>}
+      {isPending && <Text>Atualizando...</Text>}
     </View>
   );
 }

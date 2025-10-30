@@ -1,56 +1,64 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { ScrollView, StyleSheet, Image, Pressable } from "react-native";
-import { Text, TextInput, Button, Card } from "react-native-paper";
+import { ScrollView, StyleSheet, Image, View } from "react-native";
+import { Button, Text, TextInput, Card } from "react-native-paper";
 
 export default function Index() {
   const router = useRouter();
-  const [idade, onChangeIdade] = useState("");
+  const [idade, setIdade] = useState("");
   const [showDetails, setShowDetails] = useState(true);
   const anoNasc = new Date().getFullYear() - parseInt(idade);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text variant="headlineLarge" style={{ marginBottom: 30 }}>
+      <Text variant="headlineMedium" style={{ marginBottom: 20 }}>
         Olá Turma!
       </Text>
 
-      <Card style={{ borderRadius: 100, overflow: "hidden", marginBottom: 20 }}>
-        <Image
-          style={styles.avatar}
-          source={require("@/assets/images/avatar.jpg")}
-          resizeMode="cover"
-        />
+      <Image
+        style={styles.avatar}
+        source={require("@/assets/images/avatar.jpg")}
+      />
+
+      <Card
+        style={{ marginVertical: 20, width: "90%" }}
+        onPress={() => setShowDetails(!showDetails)}
+      >
+        <Card.Content>
+          <Text variant="bodyMedium" numberOfLines={showDetails ? 0 : 1}>
+            Este é um App de exemplo da disciplina Programação Web e Mobile
+            do Curso de Ciência da Computação da Universidade Católica de
+            Pernambuco (semestre 2025.2)
+          </Text>
+        </Card.Content>
       </Card>
 
-      <Pressable onPress={() => setShowDetails(!showDetails)}>
-        <Text
-          numberOfLines={showDetails ? 0 : 1}
-          style={{ fontSize: 16, marginBottom: 20 }}
-        >
-          Este é um App de exemplo da disciplina Programação Web e Mobile do
-          Curso de Ciência da Computação da Universidade Católica de Pernambuco
-          (semestre 2025.2)
-        </Text>
-      </Pressable>
-
       {!isNaN(anoNasc) && (
-        <Text variant="bodyLarge">Você nasceu em {anoNasc}</Text>
+        <Text variant="titleMedium">Você nasceu em {anoNasc}</Text>
       )}
 
       <TextInput
-        mode="outlined"
         label="Qual a sua idade?"
-        value={idade}
-        onChangeText={onChangeIdade}
+        mode="outlined"
         keyboardType="numeric"
-        style={{ width: 250, marginVertical: 15 }}
+        value={idade}
+        onChangeText={setIdade}
+        style={{ width: 250, marginVertical: 10 }}
       />
 
+      <View style={styles.buttonsContainer}>
+        <Button mode="contained" onPress={() => alert("Botão OK pressionado")}>
+          OK
+        </Button>
+        <Button mode="outlined" onPress={() => alert("Botão Cancel pressionado")}>
+          Cancel
+        </Button>
+      </View>
+
       <Button
-        mode="contained"
+        mode="contained-tonal"
+        style={{ marginTop: 20 }}
         onPress={() => router.navigate("/taskList")}
-        style={{ marginVertical: 10 }}
       >
         Ir para Lista de Tarefas
       </Button>
@@ -60,13 +68,19 @@ export default function Index() {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "beige",
-    padding: 15,
+    padding: 20,
   },
   avatar: {
     width: 150,
     height: 150,
+    borderRadius: 75,
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: 250,
+    marginTop: 10,
   },
 });
