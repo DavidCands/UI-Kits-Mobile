@@ -1,17 +1,37 @@
-import { Button, Switch, View, Text } from "react-native";
+import { Card, Text, Switch, IconButton } from "react-native-paper";
 
 export function CardTask({ task, onDelete, onCheck }) {
   return (
-    <View>
-      <Text>{task.description}</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={"#f5dd4b"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={() => onCheck(task)}
-        value={task.done}
-      />
-      <Button title="X" onPress={() => onDelete(task.objectId)} />
-    </View>
+    <Card style={{ marginVertical: 5, padding: 10 }}>
+      <Card.Content
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <Text
+          variant="bodyLarge"
+          style={{
+            textDecorationLine: task.done ? "line-through" : "none",
+          }}
+        >
+          {task.description}
+        </Text>
+
+        <Switch
+          value={task.done}
+          onValueChange={() => onCheck(task)}
+          color="#6200ee"
+        />
+
+        <IconButton
+          icon="delete"
+          iconColor="red"
+          size={20}
+          onPress={() => onDelete(task.objectId)}
+        />
+      </Card.Content>
+    </Card>
   );
 }

@@ -1,12 +1,10 @@
 import { Stack } from "expo-router";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-const queryClient = new QueryClient();
+import { Provider as PaperProvider } from "react-native-paper";
 
 export default function RootLayout() {
   return (
-    <QueryClientProvider client={queryClient}>
+    <PaperProvider>
       <Stack />
-    </QueryClientProvider>
+    </PaperProvider>
   );
 }

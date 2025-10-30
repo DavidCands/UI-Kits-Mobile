@@ -2,7 +2,8 @@ import { addTask, deleteTask, getTasks, updateTask } from "@/api";
 import { CardTask } from "@/components/CardTask";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { Button, FlatList, Text, TextInput, View } from "react-native";
+import { FlatList, View } from "react-native";
+import { Text, TextInput, Button, Divider } from "react-native-paper";
 
 export default function TaskList() {
   const [description, setDescription] = useState("");
@@ -34,38 +35,34 @@ export default function TaskList() {
     },
   });
 
-  if (isFetching) {
-    return <Text>Loading...</Text>;
-  }
-  if (error) {
-    return <Text>Error: {error.message}</Text>;
-  }
-  if (!data) {
-    return <Text>No data available</Text>;
-  }
+  if (isFetching) return <Text>Carregando...</Text>;
+  if (error) return <Text>Erro: {error.message}</Text>;
+  if (!data) return <Text>Nenhuma tarefa encontrada.</Text>;
+
   return (
-    <View>
-      <Text style={{ fonteSize: 24, fontWeight: "bold" }}>Task List</Text>
-      <View style={{ flexDirection: "row" }}>
+    <View style={{ padding: 20 }}>
+      <Text variant="headlineMedium" style={{ marginBottom: 10 }}>
+        Lista de Tarefas
+      </Text>
+
+      <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
         <TextInput
-          placeholder="Add a task"
+          mode="outlined"
+          placeholder="Adicionar tarefa"
           value={description}
           onChangeText={setDescription}
+          style={{ flex: 1 }}
         />
         <Button
-          title="Add"
+          mode="contained"
           onPress={() => addMutation.mutate({ description })}
-        />
+        >
+          Adicionar
+        </Button>
       </View>
-      <View
-        style={{
-          marginVertical: 5,
-          backgroundColor: "grey",
-          width: "90%",
-          height: 2,
-          alignSelf: "center",
-        }}
-      />
+
+      <Divider style={{ marginVertical: 15 }} />
+
       <FlatList
         data={data.results}
         keyExtractor={(item) => item.objectId}
@@ -78,7 +75,8 @@ export default function TaskList() {
           />
         )}
       />
-      {isPending && <Text>Pending...</Text>}
+
+      {isPending && <Text>Aguarde...</Text>}
     </View>
   );
 }
